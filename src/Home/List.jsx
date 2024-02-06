@@ -1,5 +1,4 @@
 import { TbPointFilled } from "react-icons/tb";
-import { HiDotsHorizontal } from "react-icons/hi";
 import { Dropdown } from "react-bootstrap";
 import { useState } from "react";
 import AddTaskModal from "../Helper/Modals/Modal";
@@ -7,6 +6,15 @@ const List = ({ data, tasks, setTasks }) => {
   const [show, setShow] = useState(false);
   const handleUpdateTask = () => {
     setShow(true);
+  };
+
+  // Delete A Single Task Handler
+  const handleDeleteTask = (id) => {
+    const confirm = window.confirm("Are You Sure ?");
+    if (confirm) {
+      const deleteTask = tasks?.filter((task) => task.id !== id);
+      setTasks(() => [...deleteTask]);
+    }
   };
   return (
     <>
@@ -33,7 +41,9 @@ const List = ({ data, tasks, setTasks }) => {
               <Dropdown.Item onClick={() => handleUpdateTask(data.id)}>
                 edit
               </Dropdown.Item>
-              <Dropdown.Item href="#/action-2">delete</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleDeleteTask(data.id)}>
+                delete
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </td>
