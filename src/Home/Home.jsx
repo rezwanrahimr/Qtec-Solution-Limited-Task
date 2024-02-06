@@ -21,7 +21,11 @@ const Home = () => {
             <Card className="w-75 w-md-50 mt-4">
               <section className="d-flex justify-content-center align-items-center m-4">
                 <h2>You've Got Task & Complete</h2>
-                <Button className="ms-4" onClick={handleShowModal}>
+                <Button
+                  className="ms-4"
+                  onClick={handleShowModal}
+                  style={{ backgroundColor: "#0284C7" }}
+                >
                   <CiCirclePlus size={20} className="me-2" />
                   Add New
                 </Button>
