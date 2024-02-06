@@ -20,7 +20,13 @@ const Home = () => {
           <Col className="d-flex justify-content-center align-items-center">
             <Card className="w-75 w-md-50 mt-4">
               <section className="d-flex justify-content-center align-items-center m-4">
-                <h2>You've Got Task & Complete</h2>
+                <h2>
+                  You've Got{" "}
+                  <span style={{ color: "#F34779" }}>
+                    {tasks?.length} Task{" "}
+                  </span>
+                  & Complete
+                </h2>
                 <Button
                   className="ms-4"
                   onClick={handleShowModal}
