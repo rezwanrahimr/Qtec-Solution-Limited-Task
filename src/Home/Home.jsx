@@ -34,12 +34,22 @@ const Home = () => {
               <Table responsive>
                 <tbody>
                   {tasks.map((item) => (
-                    <List key={item.id} data={item} />
+                    <List
+                      key={item.id}
+                      data={item}
+                      tasks={tasks}
+                      setTasks={setTasks}
+                    />
                   ))}
                 </tbody>
               </Table>
               {/* Add New Task Form Modal */}
-              <AddTaskModal show={show} setShow={setShow} setTasks={setTasks} />
+              <AddTaskModal
+                show={show}
+                setShow={setShow}
+                tasks={tasks}
+                setTasks={setTasks}
+              />
             </Card>
           </Col>
         </Row>

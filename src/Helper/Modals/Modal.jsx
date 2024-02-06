@@ -4,11 +4,11 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { v4 as uuidv4 } from "uuid";
 
-const AddTaskModal = ({ show, setShow, setTasks, initialValues }) => {
+const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
   const [formData, setFormData] = useState(
     initialValues || {
       name: "",
-      priority: "High",
+      priority: "",
       details: "",
     }
   );
@@ -17,7 +17,7 @@ const AddTaskModal = ({ show, setShow, setTasks, initialValues }) => {
     setFormData(
       initialValues || {
         name: "",
-        priority: "High",
+        priority: "",
         details: "",
       }
     );
@@ -41,7 +41,14 @@ const AddTaskModal = ({ show, setShow, setTasks, initialValues }) => {
       status: "incomplete",
     };
 
-    setTasks((prevState) => [...prevState, newTask]);
+    if (initialValues && initialValues?.id) {
+      const checkTask = tasks?.filter((task) => task.id !== initialValues.id);
+      console.log("checkTask", checkTask);
+      setTasks(() => [...checkTask, newTask]);
+    } else {
+      setTasks((prevState) => [...prevState, newTask]);
+    }
+
     handleClose();
   };
 
