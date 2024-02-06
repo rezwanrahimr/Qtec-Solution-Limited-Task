@@ -1,5 +1,5 @@
 import { TbPointFilled } from "react-icons/tb";
-import { Dropdown } from "react-bootstrap";
+import { Badge, Dropdown } from "react-bootstrap";
 import { useState } from "react";
 import AddTaskModal from "../Helper/Modals/Modal";
 const List = ({ data, tasks, setTasks }) => {
@@ -23,8 +23,26 @@ const List = ({ data, tasks, setTasks }) => {
           <TbPointFilled />
         </td>
         <td>{data.name}</td>
-        <td>{data.status}</td>
-        <td>{data.priority}</td>
+        <td>
+          {data.status === "Incomplete" && (
+            <Badge bg="warning">{data.status}</Badge>
+          )}
+          {data.status === "Complete" && (
+            <Badge bg="success">{data.status}</Badge>
+          )}
+        </td>
+        <td>
+          {data.priority === "High" && (
+            <Badge bg="primary">{data.priority}</Badge>
+          )}
+          {data.priority === "Medium" && (
+            <Badge bg="info">{data.priority}</Badge>
+          )}
+          {data.priority === "Low" && (
+            <Badge bg="warning">{data.priority}</Badge>
+          )}
+        </td>
+
         <td>
           <Dropdown>
             <Dropdown.Toggle

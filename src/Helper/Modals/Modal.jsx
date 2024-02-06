@@ -38,7 +38,7 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
       name,
       priority,
       details,
-      status: "incomplete",
+      status: "Incomplete",
     };
 
     if (initialValues && initialValues?.id) {
