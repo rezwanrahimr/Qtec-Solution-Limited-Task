@@ -34,6 +34,6 @@ The To-Do app is a simple application designed to help users manage their tasks 
 
 - **Task Sorting:** Tasks can be sorted based on priority .
 
-## Technologies used in this project:
+## Technologies:
 
 - \*\*React.js React-Bootstrap uuid(generate reandom ids) sweetalert2(displaying alert messages ) react-icons( adding icons).

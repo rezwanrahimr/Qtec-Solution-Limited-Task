@@ -54,6 +54,7 @@ const Home = () => {
 
     setTasks(updatedTasks);
 
+    setSelectedIds((prevState) => !prevState.includes(selectedIds));
   };
 
   //task delete handler function
