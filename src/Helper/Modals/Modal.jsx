@@ -105,12 +105,11 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
                 onChange={handleInputChange}
               />
             </Form.Group>
-
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" type="submit">
+            <Button className="me-2" variant="success" type="submit">
               Submit
+            </Button>
+            <Button variant="danger" onClick={handleClose}>
+              Close
             </Button>
           </Form>
         </Modal.Body>

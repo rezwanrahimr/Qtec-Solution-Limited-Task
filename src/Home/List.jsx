@@ -24,7 +24,7 @@ const List = ({ data, tasks, setTasks, disable, selectedIds, setSelectedIds }) =
         <td style={{ textDecoration: 'none' }}>
           <Form.Check
             aria-label="option 1"
-            checked={selectedIds.includes(data.id)}
+            checked={disable ? true : selectedIds.includes(data.id)}
             onChange={(e) => handleCheckboxChange(e, data.id)}
           />
         </td>
