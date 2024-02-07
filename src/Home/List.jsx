@@ -1,14 +1,14 @@
-import { TbPointFilled } from "react-icons/tb";
 import { Badge, Dropdown, Form } from "react-bootstrap";
 import { useState } from "react";
 import AddTaskModal from "../Helper/Modals/Modal";
+
 const List = ({ data, tasks, setTasks, disable, selectedIds, setSelectedIds }) => {
   const [show, setShow] = useState(false);
   const handleUpdateTask = () => {
     setShow(true);
   };
 
-  // 
+  // set selected task ids
   const handleCheckboxChange = (event, id) => {
     const { checked } = event.target;
     if (checked) {
@@ -21,7 +21,7 @@ const List = ({ data, tasks, setTasks, disable, selectedIds, setSelectedIds }) =
   return (
     <>
       <tr style={disable && { backgroundColor: 'gray', color: '#999999', pointerEvents: 'none', cursor: 'not-allowed', }}>
-        <td style={{ textDecoration: 'none' }}>
+        <td>
           <Form.Check
             aria-label="option 1"
             checked={disable ? true : selectedIds.includes(data.id)}
@@ -59,7 +59,6 @@ const List = ({ data, tasks, setTasks, disable, selectedIds, setSelectedIds }) =
                 color: "white",
               }}
             >
-              {/* <HiDotsHorizontal /> */}
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => handleUpdateTask(data.id)}>

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { v4 as uuidv4 } from "uuid";
 
 const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
+
   const [formData, setFormData] = useState(
     initialValues || {
       name: "",
@@ -34,6 +35,7 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
     const details = e.target.details.value;
 
     const newTask = {
+      // set unique id
       id: uuidv4(),
       name,
       priority,
@@ -49,6 +51,13 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
       setTasks((prevState) => [...prevState, newTask]);
     }
 
+    setFormData({
+      name: "",
+      priority: "",
+      details: "",
+    });
+
+
     handleClose();
   };
 
@@ -60,9 +69,13 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
     }));
   };
 
+  const isFormValid = () => {
+    return formData.name.trim() !== "" && formData.priority.trim() !== "" && formData.details.trim() !== "";
+  };
+
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add New Task</Modal.Title>
         </Modal.Header>
@@ -73,13 +86,13 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
               <Form.Control
                 name="name"
                 type="text"
-                placeholder="enter task title"
+                placeholder="Enter Task Title"
                 autoFocus
                 value={formData.name}
                 onChange={handleInputChange}
               />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="mb-3">
               <Form.Label>Select Priority</Form.Label>
               <Form.Select
                 name="priority"
@@ -99,13 +112,13 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
               <Form.Control
                 name="details"
                 as="textarea"
-                placeholder="enter task details"
+                placeholder="Enter Task Details"
                 rows={3}
                 value={formData.details}
                 onChange={handleInputChange}
               />
             </Form.Group>
-            <Button className="me-2" variant="success" type="submit">
+            <Button className="me-2" variant="success" type="submit" disabled={!isFormValid()}>
               Submit
             </Button>
             <Button variant="danger" onClick={handleClose}>

@@ -168,6 +168,8 @@ const Home = () => {
                   </div>
                 </div>
               </div>
+
+              {/* task list table */}
               <Table responsive>
                 <tbody>
                   <tr>
@@ -213,6 +215,8 @@ const Home = () => {
                   })}
                 </tbody>
               </Table>
+
+              {/* Modal */}
               <AddTaskModal show={show} setShow={setShow} tasks={tasks} setTasks={setTasks} />
             </Card>
           </Col>
