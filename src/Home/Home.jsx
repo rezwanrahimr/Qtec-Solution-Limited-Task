@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import "./Home.css";
 import List from "./List";
+import Swal from "sweetalert2";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
@@ -20,24 +21,48 @@ const Home = () => {
 
   //
   const handleMakeTaskComplete = () => {
-    // Filter out completed tasks from the current state
     const filteredTasks = tasks.filter(task => !selectedIds.includes(task.id));
 
-    // Generate new completed tasks with "Complete" status
     const completedTasks = selectedIds.map(id => ({
       ...tasks.find(task => task.id === id),
       status: "Complete"
     }));
 
-    // Concatenate the filtered tasks with the completed tasks
     const updatedTasks = [...filteredTasks, ...completedTasks];
 
-    // Update the tasks state
     setTasks(updatedTasks);
 
-    // Remove the IDs from selectedIds
     setSelectedIds(prevIds => prevIds.filter(itemId => !selectedIds.includes(itemId)));
   };
+
+  //
+  const handleTaskDelete = () => {
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Confirm"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const filteredTasks = tasks.filter(task => !selectedIds.includes(task.id));
+
+        setTasks(filteredTasks);
+
+        setSelectedIds(prevIds => prevIds.filter(itemId => !selectedIds.includes(itemId)));
+
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
+
+  }
 
   return (
     <div>
@@ -72,7 +97,7 @@ const Home = () => {
                 </Button>
                   <Button
                     className="ms-4"
-                    onClick={handleShowModal}
+                    onClick={handleTaskDelete}
                     variant="danger"
                   // style={{ backgroundColor: "#0284C7" }}
                   >
