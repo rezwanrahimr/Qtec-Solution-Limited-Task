@@ -16,6 +16,29 @@ const Home = () => {
     setShow(true);
   };
   console.log(tasks, selectedIds);
+
+
+  //
+  const handleMakeTaskComplete = () => {
+    // Filter out completed tasks from the current state
+    const filteredTasks = tasks.filter(task => !selectedIds.includes(task.id));
+
+    // Generate new completed tasks with "Complete" status
+    const completedTasks = selectedIds.map(id => ({
+      ...tasks.find(task => task.id === id),
+      status: "Complete"
+    }));
+
+    // Concatenate the filtered tasks with the completed tasks
+    const updatedTasks = [...filteredTasks, ...completedTasks];
+
+    // Update the tasks state
+    setTasks(updatedTasks);
+
+    // Remove the IDs from selectedIds
+    setSelectedIds(prevIds => prevIds.filter(itemId => !selectedIds.includes(itemId)));
+  };
+
   return (
     <div>
       <Container fluid className="h-100">
@@ -40,8 +63,9 @@ const Home = () => {
                 </Button>
                 {selectedIds.length > 0 && <><Button
                   className="ms-4"
-                  onClick={handleShowModal}
+                  onClick={handleMakeTaskComplete}
                   style={{ backgroundColor: "#25d366", border: 'none' }}
+
                 >
                   <IoMdDoneAll size={20} className="me-2" />
                   Completed

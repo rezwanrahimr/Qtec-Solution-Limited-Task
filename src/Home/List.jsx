@@ -8,16 +8,6 @@ const List = ({ data, tasks, setTasks, selectedIds, setSelectedIds }) => {
     setShow(true);
   };
 
-  // Delete A Single Task Handler
-  const handleDeleteTask = (id) => {
-    const confirm = window.confirm("Are You Sure ?");
-    if (confirm) {
-      const deleteTask = tasks?.filter((task) => task.id !== id);
-      setTasks(() => [...deleteTask]);
-    }
-  };
-
-
   // 
   const handleCheckboxChange = (event, id) => {
     const { checked } = event.target;
@@ -74,9 +64,6 @@ const List = ({ data, tasks, setTasks, selectedIds, setSelectedIds }) => {
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => handleUpdateTask(data.id)}>
                 edit
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => handleDeleteTask(data.id)}>
-                delete
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
