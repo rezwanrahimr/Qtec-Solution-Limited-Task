@@ -1,24 +1,39 @@
-import { Modal } from "react-bootstrap";
+import { Badge, Button, Modal } from "react-bootstrap";
 
 const ShowDetailsModal = ({ id, showViewDetails, setShowViewDetails }) => {
-    const handleClose = () => {
-        setShowViewDetails(false);
-    }
+  const handleClose = () => {
+    setShowViewDetails(false);
+  };
 
-    const getTask = localStorage.getItem('tasks');
-    const task = JSON.parse(getTask).find(task => task.id === id);
+  const getTask = localStorage.getItem("tasks");
+  const task = JSON.parse(getTask)?.find((task) => task.id === id);
 
-    return <>
-        <Modal show={showViewDetails} onHide={handleClose} >
-            <Modal.Title style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>{task?.name}</span>
-                <span>{task?.priority}</span>
-            </Modal.Title>
-
-            <Modal.Body>
-                {task?.details}
-            </Modal.Body>
-        </Modal>
+  return (
+    <>
+      <Modal show={showViewDetails} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <span>{task?.name}</span>
+          </Modal.Title>
+          {task?.priority === "High" && (
+            <Badge className="ms-2" bg="primary">
+              {task.priority}
+            </Badge>
+          )}
+          {task?.priority === "Medium" && (
+            <Badge className="ms-2" bg="info">
+              {task.priority}
+            </Badge>
+          )}
+          {task?.priority === "Low" && (
+            <Badge className="ms-2" bg="warning">
+              {task.priority}
+            </Badge>
+          )}
+        </Modal.Header>
+        <Modal.Body>{task?.details}</Modal.Body>
+      </Modal>
     </>
-}
+  );
+};
 export default ShowDetailsModal;

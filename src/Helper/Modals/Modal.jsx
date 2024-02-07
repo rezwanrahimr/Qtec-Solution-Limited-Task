@@ -6,11 +6,10 @@ import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 
 const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
-
   const [formData, setFormData] = useState(
     initialValues || {
       name: "",
-      priority: "",
+      priority: "High",
       details: "",
     }
   );
@@ -19,7 +18,7 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
     setFormData(
       initialValues || {
         name: "",
-        priority: "",
+        priority: "High",
         details: "",
       }
     );
@@ -58,13 +57,12 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
       details: "",
     });
 
-
     handleClose();
 
     Swal.fire({
       title: "Good job!",
       text: "New Task is Added!",
-      icon: "success"
+      icon: "success",
     });
   };
 
@@ -77,7 +75,11 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
   };
 
   const isFormValid = () => {
-    return formData.name.trim() !== "" && formData.priority.trim() !== "" && formData.details.trim() !== "";
+    return (
+      formData.name.trim() !== "" &&
+      formData.priority.trim() !== "" &&
+      formData.details.trim() !== ""
+    );
   };
 
   return (
@@ -93,7 +95,7 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
               <Form.Control
                 name="name"
                 type="text"
-                placeholder="Enter Task Title"
+                placeholder="Enter Task Name"
                 autoFocus
                 value={formData.name}
                 onChange={handleInputChange}
@@ -125,7 +127,12 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
                 onChange={handleInputChange}
               />
             </Form.Group>
-            <Button className="me-2" variant="success" type="submit" disabled={!isFormValid()}>
+            <Button
+              className="me-2"
+              variant="success"
+              type="submit"
+              disabled={!isFormValid()}
+            >
               Submit
             </Button>
             <Button variant="danger" onClick={handleClose}>
