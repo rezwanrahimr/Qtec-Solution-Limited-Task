@@ -20,8 +20,8 @@ const List = ({ data, tasks, setTasks, disable, selectedIds, setSelectedIds }) =
 
   return (
     <>
-      <tr style={disable && { backgroundColor: 'gray', color: '#999999', pointerEvents: 'none', cursor: 'not-allowed' }}>
-        <td>
+      <tr style={disable && { backgroundColor: 'gray', color: '#999999', pointerEvents: 'none', cursor: 'not-allowed', }}>
+        <td style={{ textDecoration: 'none' }}>
           <Form.Check
             aria-label="option 1"
             checked={selectedIds.includes(data.id)}

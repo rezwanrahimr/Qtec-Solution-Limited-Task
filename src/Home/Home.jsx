@@ -3,7 +3,7 @@ import { CiCirclePlus } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoMdDoneAll } from "react-icons/io";
 import AddTaskModal from "../Helper/Modals/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import "./Home.css";
 import List from "./List";
@@ -19,6 +19,28 @@ const Home = () => {
     setShow(true);
   };
   console.log(tasks, selectedIds);
+
+
+  useEffect(() => {
+    const storedTasks = localStorage.getItem('tasks');
+    if (storedTasks && !tasks.length) {
+      setTasks(JSON.parse(storedTasks));
+      setSelectedIds(JSON.parse(storedTasks).map(task => {
+        if (task.status === "Complete") {
+          return task.id
+        }
+      }))
+    }
+  }, [tasks]);
+
+  useEffect(() => {
+
+    if (tasks.length) {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+  }, [tasks]);
+
+
 
 
   //
@@ -103,7 +125,7 @@ const Home = () => {
                         <span style={{ color: "#F34779" }}>
                           {tasks?.length} Task{" "}
                         </span>
-                        & Complete
+                        & Complete {tasks.filter(task => task.status === "Complete").length}
                       </h2>
                     </div>
                     <div className="col-md-4">
