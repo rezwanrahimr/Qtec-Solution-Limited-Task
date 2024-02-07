@@ -37,3 +37,5 @@ The To-Do app is a simple application designed to help users manage their tasks 
 ## Technologies:
 
 - \*\*React.js React-Bootstrap uuid(generate reandom ids) sweetalert2(displaying alert messages ) react-icons( adding icons).
+
+- **Live Link:** https://65c3bcdb2cc7e85ad1dbb5d8--mellifluous-florentine-bdb3a9.netlify.app
