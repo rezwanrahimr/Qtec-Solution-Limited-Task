@@ -2,7 +2,7 @@ import { TbPointFilled } from "react-icons/tb";
 import { Badge, Dropdown, Form } from "react-bootstrap";
 import { useState } from "react";
 import AddTaskModal from "../Helper/Modals/Modal";
-const List = ({ data, tasks, setTasks, selectedIds, setSelectedIds }) => {
+const List = ({ data, tasks, setTasks, disable, selectedIds, setSelectedIds }) => {
   const [show, setShow] = useState(false);
   const handleUpdateTask = () => {
     setShow(true);
@@ -20,7 +20,7 @@ const List = ({ data, tasks, setTasks, selectedIds, setSelectedIds }) => {
 
   return (
     <>
-      <tr>
+      <tr style={disable && { backgroundColor: 'gray', color: '#999999', pointerEvents: 'none', cursor: 'not-allowed' }}>
         <td>
           <Form.Check
             aria-label="option 1"
