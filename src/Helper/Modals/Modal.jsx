@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 
 const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
@@ -59,6 +60,12 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
 
 
     handleClose();
+
+    Swal.fire({
+      title: "Good job!",
+      text: "New Task is Added!",
+      icon: "success"
+    });
   };
 
   const handleInputChange = (e) => {

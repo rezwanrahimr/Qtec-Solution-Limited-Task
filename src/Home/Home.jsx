@@ -55,6 +55,12 @@ const Home = () => {
     setTasks(updatedTasks);
 
     setSelectedIds((prevState) => !prevState.includes(selectedIds));
+
+    Swal.fire({
+      title: "Good job!",
+      text: "Another Task Completed!",
+      icon: "success"
+    });
   };
 
   //task delete handler function

@@ -1,12 +1,21 @@
 import { Badge, Dropdown, Form } from "react-bootstrap";
 import { useState } from "react";
 import AddTaskModal from "../Helper/Modals/Modal";
+import ShowDetailsModal from "../Helper/Modals/ShowDetailsModal";
 
 const List = ({ data, tasks, setTasks, disable, selectedIds, setSelectedIds }) => {
+  const [taskId, setTaskId] = useState(null);
   const [show, setShow] = useState(false);
+  const [showViewDetails, setShowViewDetails] = useState(false);
   const handleUpdateTask = () => {
     setShow(true);
   };
+
+  const handleViewDetails = (id) => {
+    setTaskId(id);
+    setShowViewDetails(true);
+  }
+
 
   // set selected task ids
   const handleCheckboxChange = (event, id) => {
@@ -24,7 +33,7 @@ const List = ({ data, tasks, setTasks, disable, selectedIds, setSelectedIds }) =
         <td>
           <Form.Check
             aria-label="option 1"
-            checked={disable ? true : selectedIds.includes(data.id)}
+            checked={disable ? true : selectedIds.length && selectedIds?.includes(data.id)}
             onChange={(e) => handleCheckboxChange(e, data.id)}
           />
         </td>
@@ -64,6 +73,9 @@ const List = ({ data, tasks, setTasks, disable, selectedIds, setSelectedIds }) =
               <Dropdown.Item onClick={() => handleUpdateTask(data.id)}>
                 edit
               </Dropdown.Item>
+              <Dropdown.Item onClick={() => handleViewDetails(data.id)}>
+                view details
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </td>
@@ -80,6 +92,7 @@ const List = ({ data, tasks, setTasks, disable, selectedIds, setSelectedIds }) =
           details: data.details,
         }}
       />
+      < ShowDetailsModal id={taskId} showViewDetails={showViewDetails} setShowViewDetails={setShowViewDetails} />
     </>
   );
 };
