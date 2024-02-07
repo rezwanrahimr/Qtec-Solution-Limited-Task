@@ -1,5 +1,7 @@
 import { Button, Table } from "react-bootstrap";
 import { CiCirclePlus } from "react-icons/ci";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { IoMdDoneAll } from "react-icons/io";
 import AddTaskModal from "../Helper/Modals/Modal";
 import { useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
@@ -9,10 +11,11 @@ import List from "./List";
 const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [show, setShow] = useState(false);
+  const [selectedIds, setSelectedIds] = useState([]);
   const handleShowModal = () => {
     setShow(true);
   };
-  console.log(tasks);
+  console.log(tasks, selectedIds);
   return (
     <div>
       <Container fluid className="h-100">
@@ -35,6 +38,23 @@ const Home = () => {
                   <CiCirclePlus size={20} className="me-2" />
                   Add New
                 </Button>
+                {selectedIds.length > 0 && <><Button
+                  className="ms-4"
+                  onClick={handleShowModal}
+                  style={{ backgroundColor: "#25d366", border: 'none' }}
+                >
+                  <IoMdDoneAll size={20} className="me-2" />
+                  Completed
+                </Button>
+                  <Button
+                    className="ms-4"
+                    onClick={handleShowModal}
+                    variant="danger"
+                  // style={{ backgroundColor: "#0284C7" }}
+                  >
+                    <RiDeleteBin6Line size={20} className="me-2 mb-1" />
+                    Delete
+                  </Button></>}
               </section>
               {/* show list item */}
               <Table responsive>
@@ -45,6 +65,8 @@ const Home = () => {
                       data={item}
                       tasks={tasks}
                       setTasks={setTasks}
+                      selectedIds={selectedIds}
+                      setSelectedIds={setSelectedIds}
                     />
                   ))}
                 </tbody>

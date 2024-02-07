@@ -1,8 +1,8 @@
 import { TbPointFilled } from "react-icons/tb";
-import { Badge, Dropdown } from "react-bootstrap";
+import { Badge, Dropdown, Form } from "react-bootstrap";
 import { useState } from "react";
 import AddTaskModal from "../Helper/Modals/Modal";
-const List = ({ data, tasks, setTasks }) => {
+const List = ({ data, tasks, setTasks, selectedIds, setSelectedIds }) => {
   const [show, setShow] = useState(false);
   const handleUpdateTask = () => {
     setShow(true);
@@ -16,11 +16,27 @@ const List = ({ data, tasks, setTasks }) => {
       setTasks(() => [...deleteTask]);
     }
   };
+
+
+  // 
+  const handleCheckboxChange = (event, id) => {
+    const { checked } = event.target;
+    if (checked) {
+      setSelectedIds(prevIds => [...prevIds, id]);
+    } else {
+      setSelectedIds(prevIds => prevIds.filter(itemId => itemId !== id));
+    }
+  };
+
   return (
     <>
       <tr>
         <td>
-          <TbPointFilled />
+          <Form.Check
+            aria-label="option 1"
+            checked={selectedIds.includes(data.id)}
+            onChange={(e) => handleCheckboxChange(e, data.id)}
+          />
         </td>
         <td>{data.name}</td>
         <td>
