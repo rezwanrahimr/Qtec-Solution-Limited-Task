@@ -74,6 +74,7 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
     }));
   };
 
+  // normal form validation script
   const isFormValid = () => {
     return (
       formData.name.trim() !== "" &&
@@ -108,7 +109,9 @@ const AddTaskModal = ({ show, setShow, tasks, setTasks, initialValues }) => {
                 value={formData.priority}
                 onChange={handleInputChange}
               >
-                <option value="High">High</option>
+                <option value="High" defaultChecked>
+                  High
+                </option>
                 <option value="Medium">Medium</option>
                 <option value="Low">Low</option>
               </Form.Select>

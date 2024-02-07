@@ -80,6 +80,7 @@ const Home = () => {
           prevIds.filter((itemId) => !selectedIds.includes(itemId))
         );
 
+        // delete task in local storage
         const storedTasks = localStorage.getItem("tasks");
         if (storedTasks) {
           let tasks = JSON.parse(storedTasks);

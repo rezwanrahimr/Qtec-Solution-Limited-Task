@@ -1,4 +1,4 @@
-import { Badge, Button, Modal } from "react-bootstrap";
+import { Badge, Modal } from "react-bootstrap";
 
 const ShowDetailsModal = ({ id, showViewDetails, setShowViewDetails }) => {
   const handleClose = () => {
